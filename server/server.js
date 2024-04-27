@@ -1,12 +1,26 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const tesseract = require('tesseract.js');
+const punycode = require('punycode/');
 
-mongoose.connect('<Mongoose Server URL>', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.once('open', () => {
-  console.log('Connected to Database');
-});
+// mongoose.connect('<Mongoose Server URL>', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connection.once('open', () => {
+//   console.log('Connected to Database');
+// });
 
+const imagePath = 'client/assets/sample2.png';
+
+let tempVariable = ''
+
+tesseract.recognize(imagePath)
+  .then((result) => {
+    // console.log(punycode.encode(result.data.text))
+    tempVariable = punycode.encode(result.data.text)
+    console.log(tempVariable)
+  }).catch((error) => {
+    console.log(error)
+  })
 
 
 const app = express();
@@ -35,4 +49,4 @@ app.use((err, req, res, next) => {
   res.status(errorObj.status).json(errorObj.message);
 });
 
-module.exports = app.listen(port, () => console.log(`Listening on port ${port}`));
+// module.exports = app.listen(3000, () => console.log(`Listening on port ${port}`));
