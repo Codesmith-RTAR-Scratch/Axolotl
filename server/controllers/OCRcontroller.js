@@ -23,11 +23,13 @@ tesseract.recognize(imagePath)
 // let itemAmount = '';
 // let itemCost = '';
 
+let bunch = []
+
 function extractData(){
     // splitting our data we got back from OCR
     const splitedData = tempVariable.split('\n') 
     console.log(tempVariable.split('\n'))
-    const lastItemOnSplitedData = splitedData.pop()
+    splitedData.pop()
 
     const numberRegex = /\b[0-9]+\b/;
 
@@ -36,6 +38,7 @@ function extractData(){
         // console.log(splitedCostData)
         const itemCost = splitedCostData[1]
         console.log('itemCost:', itemCost)
+        bunch.push(itemCost)
 
         let item;
         item = splitedCostData[0].split(splitedCostData[0].match(numberRegex))
@@ -48,6 +51,7 @@ function extractData(){
             }
         }
         console.log('foodItem:', foodItem)
+        bunch.push(foodItem)
 
         let quantity = '';
         for(const i of splitedCostData[0]){
@@ -56,10 +60,10 @@ function extractData(){
                 quantity += i
                 // console.log('Quantity:', quantity)
                 // console.log('Number Quant:', Number(quantity))
-                console.log('itemQuantity:', Number(quantity))
-            }
-            
+            }  
         }
+        console.log('itemQuantity:', Number(quantity))
+        bunch.push(Number(quantity))
     }    
     // const splitedCostData = splitedData[0].split('$')
     // console.log(splitedData[0].split('$'))
@@ -71,6 +75,7 @@ function extractData(){
     //     }
     //     console.log('fooditem:', foodItem)
     // }
+    console.log(bunch)
 };
 
 const controller = {};
