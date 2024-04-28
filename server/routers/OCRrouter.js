@@ -1,9 +1,9 @@
 const express = require('express');
-const controller = require('../controllers/controller.js');
+const controller = require('../controllers/OCRcontroller.js');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
+router.post('/', controller.upload, (req, res) => {
   res.sendStatus(200);
 });
 
