@@ -32,13 +32,17 @@ function extractData(){
     splitedData.pop()
 
     const numberRegex = /\b[0-9]+\b/;
+    for(let i = 0; i < splitedData.length; i++){
+    // for(const string of splitedData){
+        const cache = {};
 
-    for(const string of splitedData){
-        const splitedCostData = string.split('$')
+        const splitedCostData = splitedData[i].split('$');
         // console.log(splitedCostData)
-        const itemCost = splitedCostData[1]
-        console.log('itemCost:', itemCost)
-        bunch.push(itemCost)
+        const itemCost = splitedCostData[1];
+
+        cache['itemCost'] = itemCost
+        // console.log('itemCost:', itemCost);
+        // bunch.push(itemCost);
 
         let item;
         item = splitedCostData[0].split(splitedCostData[0].match(numberRegex))
@@ -50,8 +54,9 @@ function extractData(){
                 foodItem += i
             }
         }
-        console.log('foodItem:', foodItem)
-        bunch.push(foodItem)
+        // console.log('foodItem:', foodItem)
+        cache['foodItem'] = foodItem
+        // bunch.push(foodItem)
 
         let quantity = '';
         for(const i of splitedCostData[0]){
@@ -62,8 +67,10 @@ function extractData(){
                 // console.log('Number Quant:', Number(quantity))
             }  
         }
-        console.log('itemQuantity:', Number(quantity))
-        bunch.push(Number(quantity))
+        // console.log('itemQuantity:', Number(quantity))
+        cache['itemQuantity'] = Number(quantity)
+        // bunch.push(Number(quantity))
+        bunch.push(cache)
     }    
     // const splitedCostData = splitedData[0].split('$')
     // console.log(splitedData[0].split('$'))
@@ -75,6 +82,8 @@ function extractData(){
     //     }
     //     console.log('fooditem:', foodItem)
     // }
+    // console.log(bunch)
+    // console.log(cache)
     console.log(bunch)
 };
 
