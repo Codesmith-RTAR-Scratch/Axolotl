@@ -1,13 +1,13 @@
 const express = require('express');
 const path = require('path');
-const mongoose = require('mongoose');
-
-mongoose.connect('<Mongoose Server URL>', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connection.once('open', () => {
-  console.log('Connected to Database');
-});
+const router = require('./routers/OCRrouter.js');
+// const mongoose = require('mongoose');
 
 
+// mongoose.connect('<Mongoose Server URL>', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connection.once('open', () => {
+//   console.log('Connected to Database');
+// });
 
 const app = express();
 const PORT = 3000;
@@ -15,8 +15,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//routers
-const router = require('./routers/router.js')
+app.use('/upload', router)
 
 // serve static files
 
@@ -35,4 +34,4 @@ app.use((err, req, res, next) => {
   res.status(errorObj.status).json(errorObj.message);
 });
 
-module.exports = app.listen(port, () => console.log(`Listening on port ${port}`));
+module.exports = app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
