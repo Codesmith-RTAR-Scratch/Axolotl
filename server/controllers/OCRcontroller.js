@@ -5,14 +5,14 @@ const punycode = require('punycode/');
 
 const imagePath = 'client/assets/sample3.png';
 
-let tempVariable = ''
+let tempVariable = '';
+let bunch = []
 
 // OCR using tesseract to retreive information from our image file
 tesseract.recognize(imagePath)
   .then((result) => {
     tempVariable = punycode.encode(result.data.text)
     // console.log('data:', result.data)
-
     extractData()
 
   }).catch((error) => {
@@ -23,7 +23,7 @@ tesseract.recognize(imagePath)
 // let itemAmount = '';
 // let itemCost = '';
 
-let bunch = []
+
 
 function extractData(){
     // splitting our data we got back from OCR
@@ -38,7 +38,7 @@ function extractData(){
 
         const splitedCostData = splitedData[i].split('$');
         // console.log(splitedCostData)
-        const itemCost = splitedCostData[1];
+        const itemCost = Number(splitedCostData[1]);
 
         cache['itemCost'] = itemCost
         // console.log('itemCost:', itemCost);
@@ -90,7 +90,8 @@ function extractData(){
 const controller = {};
 
 controller.upload = (req, res, next) => {
-    res.status(200).send(tempVariable)
+    res.locals.bunch = bunch
+    res.status(200).send(res.locals.bunch)
 };
 
 module.exports = controller;
