@@ -7,7 +7,6 @@ import React from 'react';
 // import { useSelector } from 'react-redux';
 
 const pictureBody = () => {
-
   // const isLoading = useSelector((state) => state.photos.isLoading);
 
   return (
@@ -23,3 +22,5 @@ const pictureBody = () => {
 };
 
 export default pictureBody;
+
+

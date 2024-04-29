@@ -1,97 +1,99 @@
 const path = require('path');
 const tesseract = require('tesseract.js');
-const punycode = require('punycode/');
+// const punycode = require('punycode/');
+// npm install express-fileupload
+// req.files.image.data
+
 
 
 const imagePath = 'client/assets/sample3.png';
 
-let tempVariable = '';
-let bunch = []
-
-// OCR using tesseract to retreive information from our image file
-tesseract.recognize(imagePath)
-  .then((result) => {
-    tempVariable = punycode.encode(result.data.text)
-    // console.log('data:', result.data)
-    extractData()
-
-  }).catch((error) => {
-    console.log('error:', error.message)
-  })
+let dataVariable = '';
+const bunch = [];
 
 // let foodItem = '';
 // let itemAmount = '';
 // let itemCost = '';
 
-
-
 function extractData(){
-    // splitting our data we got back from OCR
-    const splitedData = tempVariable.split('\n') 
-    console.log(tempVariable.split('\n'))
-    splitedData.pop()
+  // splitting our data we got back from OCR
+  const splitedData = dataVariable.split('\n'); 
+  console.log(dataVariable.split('\n'));
+  splitedData.pop();
 
-    const numberRegex = /\b[0-9]+\b/;
-    for(let i = 0; i < splitedData.length; i++){
+  const numberRegex = /\b[0-9]+\b/;
+  for(let i = 0; i < splitedData.length; i++){
     // for(const string of splitedData){
-        const cache = {};
+    const cache = {};
 
-        const splitedCostData = splitedData[i].split('$');
-        // console.log(splitedCostData)
-        const itemCost = Number(splitedCostData[1]);
+    const splitedCostData = splitedData[i].split('$');
+    // console.log(splitedCostData)
+    const itemCost = Number(splitedCostData[1]);
 
-        cache['itemCost'] = itemCost
-        // console.log('itemCost:', itemCost);
-        // bunch.push(itemCost);
+    cache['itemCost'] = itemCost;
+    // console.log('itemCost:', itemCost);
+    // bunch.push(itemCost);
 
-        let item;
-        item = splitedCostData[0].split(splitedCostData[0].match(numberRegex))
-        // console.log('itemWithComma:', item.toString())
+    const item = splitedCostData[0].split(splitedCostData[0].match(numberRegex));
+    // console.log('itemWithComma:', item.toString())
 
-        let foodItem = '';
-        for(let i of item.toString()){
-            if(i !== ','){
-                foodItem += i
-            }
-        }
-        // console.log('foodItem:', foodItem)
-        cache['foodItem'] = foodItem
-        // bunch.push(foodItem)
+    let foodItem = '';
+    for(const i of item.toString()){
+      if(i !== ','){
+        foodItem += i;
+      }
+    }
+    // console.log('foodItem:', foodItem)
+    cache['foodItem'] = foodItem;
+    // bunch.push(foodItem)
 
-        let quantity = '';
-        for(const i of splitedCostData[0]){
-            // console.log(i)
-            if(i.match(numberRegex)){
-                quantity += i
-                // console.log('Quantity:', quantity)
-                // console.log('Number Quant:', Number(quantity))
-            }  
-        }
-        // console.log('itemQuantity:', Number(quantity))
-        cache['itemQuantity'] = Number(quantity)
-        // bunch.push(Number(quantity))
-        bunch.push(cache)
-    }    
-    // const splitedCostData = splitedData[0].split('$')
-    // console.log(splitedData[0].split('$'))
+    let quantity = '';
+    for(const i of splitedCostData[0]){
+      // console.log(i)
+      if(i.match(numberRegex)){
+        quantity += i;
+        // console.log('Quantity:', quantity)
+        // console.log('Number Quant:', Number(quantity))
+      }  
+    }
+    // console.log('itemQuantity:', Number(quantity))
+    cache['itemQuantity'] = Number(quantity);
+    // bunch.push(Number(quantity))
+    bunch.push(cache);
+  }    
+  // const splitedCostData = splitedData[0].split('$')
+  // console.log(splitedData[0].split('$'))
     
 
-    // for(const i of tempVariable){
-    //     if(typeof i === 'string'){
-    //         foodItem += i
-    //     }
-    //     console.log('fooditem:', foodItem)
-    // }
-    // console.log(bunch)
-    // console.log(cache)
-    console.log(bunch)
-};
+  // for(const i of tempVariable){
+  //     if(typeof i === 'string'){
+  //         foodItem += i
+  //     }
+  //     console.log('fooditem:', foodItem)
+  // }
+  // console.log(bunch)
+  // console.log(cache)
+  console.log(bunch);
+}
 
 const controller = {};
 
 controller.upload = (req, res, next) => {
-    res.locals.bunch = bunch
-    res.status(200).send(res.locals.bunch)
+
+  // OCR using tesseract to retreive information from our image file
+  tesseract.recognize(req.files.image.data)
+    .then((result) => {
+    // dataVariable = punycode.encode(result.data.text)
+      dataVariable = result.data.text;
+      // console.log('data:', result.data)
+      extractData();
+
+    }).catch((error) => {
+      console.log('error:', error.message);
+    });
+
+  res.locals.bunch = bunch;
+  res.status(200).send(res.locals.bunch);
 };
 
 module.exports = controller;
