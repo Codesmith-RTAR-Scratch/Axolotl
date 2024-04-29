@@ -19,13 +19,13 @@ module.exports = {
     hot: true,
     // port: 8080,
     allowedHosts: ['auto'],
-    // proxy: [
-    // 		{
-    // 				context: ['/api'],
-    // 				target: 'http://localhost:3000',
-    // 				secure: false,
-    // 		}
-    // ]
+    proxy: [
+      {
+        context: ['/upload'],
+        target: 'http://localhost:3000',
+        secure: false,
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({

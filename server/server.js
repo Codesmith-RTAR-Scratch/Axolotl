@@ -9,13 +9,13 @@ const router = require('./routers/OCRrouter.js');
 //   console.log('Connected to Database');
 // });
 
-const app = express();
+const app = express(); 
 const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/upload', router)
+app.use('/upload', router);
 
 // serve static files
 

@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 // import { useSelector } from 'react-redux';
 
 const pictureBody = () => {
+
   const dispatch = useDispatch();
   const fileInput = React.useRef(null);
 
@@ -16,7 +17,6 @@ const pictureBody = () => {
     formData.append('image', fileInput.current.files[0]);
     dispatch(fetchReceiptData);
   };
-
   // const isLoading = useSelector((state) => state.photos.isLoading);
 
   return (
@@ -30,3 +30,5 @@ const pictureBody = () => {
 };
 
 export default pictureBody;
+
+
