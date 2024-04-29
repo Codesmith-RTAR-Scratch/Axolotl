@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 import PictureHeader from '../components/PictureHeader';
 import PictureBody from '../components/PictureBody';
-import ReceiptChart from '../components/ReceiptChart';
 
 const PictureContainer = () => {
   return (
@@ -11,7 +10,6 @@ const PictureContainer = () => {
       <PictureHeader />
       <PictureBody />
       {/* <TabBar /> */}
-      <ReceiptChart />
     </div>
   );
 };

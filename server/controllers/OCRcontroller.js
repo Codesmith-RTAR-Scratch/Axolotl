@@ -81,7 +81,7 @@ const controller = {};
 controller.upload = (req, res, next) => {
 
   // OCR using tesseract to retreive information from our image file
-  tesseract.recognize(req.files.image.data)
+  tesseract.recognize(imagePath)
     .then((result) => {
     // dataVariable = punycode.encode(result.data.text)
       dataVariable = result.data.text;

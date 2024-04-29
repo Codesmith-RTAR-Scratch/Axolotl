@@ -11,6 +11,8 @@ const pictureBody = () => {
 
   return (
     <div className='pictureUpload'>
+      <input type="file"></input>
+
       <form action='/upload' method='post' encType='multipart/form-data'>
         <input className='input' name='image' type='file' />
         <button className='pictureUploadButton'>
