@@ -278,3 +278,31 @@
     transform: translateY(-3px);
   }
 }
+
+.receipt-table {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgb(1, 235, 252);
+  font: {
+    family: 'Jersey 15', sans-serif;
+    weight: 200;
+    style: normal;
+    size: 20px;
+  }
+  .nameInput {
+    color: rgb(1, 235, 252);
+    width: 50px;
+    font: {
+      family: 'Jersey 15', sans-serif;
+      weight: 200;
+      style: normal;
+      size: 20px;
+    }
+    hr {
+      width: 100vh;
+      color: rgb(0, 80, 86);
+    }
+  }
+}

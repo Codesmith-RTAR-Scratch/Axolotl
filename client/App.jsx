@@ -17,7 +17,7 @@ const App = () => {
         <Route path='/receipt' Component={HomePage} />
         <Route path='/' Component={PicturePage} />
       </Routes>
-      <TabBar />
+      {/* <TabBar /> */}
     </Router>
   );
 };

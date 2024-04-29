@@ -8,17 +8,18 @@ const tesseract = require('tesseract.js');
 
 const imagePath = 'client/assets/sample3.png';
 
-let dataVariable = '';
-const bunch = [];
+// let dataVariable = '';
+
 
 // let foodItem = '';
 // let itemAmount = '';
 // let itemCost = '';
 
-function extractData(){
+function extractData(req, res, dataVariable){
+  const bunch = [];
   // splitting our data we got back from OCR
   const splitedData = dataVariable.split('\n'); 
-  console.log(dataVariable.split('\n'));
+  // console.log(dataVariable.split('\n'));
   splitedData.pop();
 
   const numberRegex = /\b[0-9]+\b/;
@@ -27,11 +28,11 @@ function extractData(){
     const cache = {};
 
     const splitedCostData = splitedData[i].split('$');
-    // console.log(splitedCostData)
-    const itemCost = Number(splitedCostData[1]);
+    console.log('splitCostData: ', splitedCostData);
+    const itemCost = Number(splitedCostData[1]).toFixed(2);
 
     cache['itemCost'] = itemCost;
-    // console.log('itemCost:', itemCost);
+    console.log('itemCost:', typeof cache.itemCost);
     // bunch.push(itemCost);
 
     const item = splitedCostData[0].split(splitedCostData[0].match(numberRegex));
@@ -42,6 +43,7 @@ function extractData(){
       if(i !== ','){
         foodItem += i;
       }
+      foodItem = foodItem.trim();
     }
     // console.log('foodItem:', foodItem)
     cache['foodItem'] = foodItem;
@@ -73,6 +75,7 @@ function extractData(){
   // }
   // console.log(bunch)
   // console.log(cache)
+  res.locals.bunch = bunch;
   console.log(bunch);
 }
 
@@ -81,19 +84,19 @@ const controller = {};
 controller.upload = (req, res, next) => {
 
   // OCR using tesseract to retreive information from our image file
-  tesseract.recognize(imagePath)
+  tesseract.recognize(req.files.image.data)
     .then((result) => {
     // dataVariable = punycode.encode(result.data.text)
-      dataVariable = result.data.text;
+      const dataVariable = result.data.text;
       // console.log('data:', result.data)
-      extractData();
+      extractData(req, res, dataVariable);
+      // res.locals.bunch = bunch;
+      res.status(200).send(res.locals.bunch);
 
     }).catch((error) => {
       console.log('error:', error.message);
     });
 
-  res.locals.bunch = bunch;
-  res.status(200).send(res.locals.bunch);
 };
 
 module.exports = controller;

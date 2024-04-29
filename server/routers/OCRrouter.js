@@ -1,6 +1,5 @@
 const express = require('express');
 const controller = require('../controllers/OCRcontroller.js');
-const fileupload = require('express-fileupload');
 const fileUpload = require('express-fileupload');
 
 const router = express.Router();
