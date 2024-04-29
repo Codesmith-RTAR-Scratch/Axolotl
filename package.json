@@ -12,9 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
+<<<<<<< Updated upstream
     "axios": "^1.6.8",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
+=======
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.11.5",
+>>>>>>> Stashed changes
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
     "punycode": "^2.3.1",
