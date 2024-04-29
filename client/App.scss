@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
 
+// primary colors
+// rgb(1, 235, 252)
+// rgb(0, 182, 195)
+// rgb(0, 80, 86)
+// secondary colors
+//black
 * {
   background-color: black;
 }
@@ -16,9 +22,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+  box-shadow:
+    0px 0px 100px rgb(1, 235, 252),
+    inset 0px 0px 10px rgb(1, 235, 252),
+    0px 0px 5px rgb(255, 255, 255);
   animation: flicker 4s linear infinite alternate;
- 
+
   .icon {
     color: rgb(1, 235, 252);
     font-size: 2.5rem;
@@ -30,7 +39,7 @@
     background: none;
     padding: 0;
   }
- 
+
   .input {
     position: absolute;
     opacity: 0;
@@ -38,12 +47,16 @@
     height: 100%;
     cursor: pointer !important;
   }
- 
+
   @keyframes flicker {
-    0%, 100% {
+    0%,
+    100% {
       opacity: 1;
       border: 2px solid rgb(1, 235, 252);
-      box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+      box-shadow:
+        0px 0px 100px rgb(1, 235, 252),
+        inset 0px 0px 10px rgb(1, 235, 252),
+        0px 0px 5px rgb(255, 255, 255);
     }
     50% {
       opacity: 0.3;
@@ -51,17 +64,17 @@
       box-shadow: none;
     }
   }
- 
+
   @keyframes iconflicker {
-    0%, 100% { 
-      // opacity: 1; 
+    0%,
+    100% {
+      // opacity: 1;
     }
     50% {
       // opacity: 0.2;
     }
   }
- }
- 
+}
 
 .pictureHeader {
   h1 {
@@ -71,7 +84,7 @@
     transform: translateX(-50%);
     top: 20px;
     font: {
-      family: "Jersey 15", sans-serif;
+      family: 'Jersey 15', sans-serif;
       weight: 300;
       style: normal;
       size: 75px;
@@ -114,5 +127,154 @@
     a {
       color: rgb(0, 80, 86);
     }
+  }
+}
+
+.loading {
+  .cube-container {
+    width: 200px;
+    height: 200px;
+    perspective: 800px;
+    margin: 50px auto;
+  }
+
+  .cube {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    animation: rotate 15s infinite linear;
+  }
+
+  .face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    color: rgb(1, 235, 252);
+    font-size: 18px;
+    text-align: center;
+    line-height: 200px;
+    background: transparent;
+    opacity: 0.9;
+    border: 2px solid;
+    border-image: linear-gradient(
+      90deg,
+      rgba(14, 8, 110, 1) 0%,
+      rgba(15, 15, 167, 1) 26%,
+      rgba(20, 45, 255, 1) 85%
+    );
+    box-shadow: 0 0 100px rgba(0, 182, 195, 0.61);
+  }
+
+  .front {
+    transform: translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .back {
+    transform: rotateY(180deg) translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .right {
+    transform: rotateY(90deg) translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .left {
+    transform: rotateY(-90deg) translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .top {
+    transform: rotateX(90deg) translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .bottom {
+    transform: rotateX(-90deg) translateZ(100px);
+    background-color: rgb(1, 235, 252);
+    background-image: linear-gradient(
+      160deg,
+      rgb(1, 235, 252) 0%,
+      rgb(0, 182, 195) 100%
+    );
+  }
+
+  .cube-container:hover .cube {
+    animation-play-state: paused;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotateX(0) rotateY(0) rotateZ(0);
+    }
+
+    100% {
+      transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+  }
+}
+
+.tab-bar {
+  display: flex;
+  background-color: rgba(245, 73, 144);
+  width: 250px;
+  height: 40px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  box-shadow:
+    rgba(0, 0, 0, 0.35) 0px 5px 15px,
+    rgba(245, 73, 144, 0.5) 5px 10px 15px;
+    
+  .button {
+    outline: 0 !important;
+    border: 0 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+    ion-icon: {
+      font-size: 100%;
+      position: absolute;
+      // width: 5em;
+      // height: 1em;
+    }
+  }
+
+  .button:hover {
+    transform: translateY(-3px);
   }
 }

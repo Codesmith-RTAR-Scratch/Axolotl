@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-// import picture from './components/picture.js';
+import PictureHeader from '../components/PictureHeader';
 
-const PictureContainer = () => {
+const RecieptContainer = () => {
   return (
     <div className='container'>
-      
-    </div>
+      <PictureHeader />
+    </div> 
   );
 };
 
-export default PictureContainer;
+export default RecieptContainer;
