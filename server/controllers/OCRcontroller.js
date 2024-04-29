@@ -76,7 +76,6 @@ function extractData(req, res, dataVariable){
   // console.log(bunch)
   // console.log(cache)
   res.locals.bunch = bunch;
-  console.log(bunch);
 }
 
 const controller = {};
@@ -85,12 +84,14 @@ controller.upload = (req, res, next) => {
 
   // OCR using tesseract to retreive information from our image file
   tesseract.recognize(req.files.image.data)
+  
     .then((result) => {
     // dataVariable = punycode.encode(result.data.text)
       const dataVariable = result.data.text;
       // console.log('data:', result.data)
       extractData(req, res, dataVariable);
       // res.locals.bunch = bunch;
+    
       res.status(200).send(res.locals.bunch);
 
     }).catch((error) => {
