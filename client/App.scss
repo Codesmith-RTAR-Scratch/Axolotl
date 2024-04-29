@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
+* {
+  background-color: black;
+}
+.pictureUpload {
+  position: absolute;
+  top: 50%; // Center vertically
+  left: 50%; // Center horizontally
+  transform: translate(-50%, -50%); // Adjust position to be truly centered
+  width: 150px; // Increase width
+  height: 150px; // Increase height
+  border-radius: 50%;
+  border: 2px solid rgb(1, 235, 252);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+  animation: flicker 4s linear infinite alternate;
+ 
+  .icon {
+    color: rgb(1, 235, 252);
+    font-size: 2.5rem;
+    cursor: pointer;
+    animation: iconflicker 4s linear infinite alternate;
+  }
+  .pictureUploadButton {
+    border: none;
+    background: none;
+    padding: 0;
+  }
+ 
+  .input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer !important;
+  }
+ 
+  @keyframes flicker {
+    0%, 100% {
+      opacity: 1;
+      border: 2px solid rgb(1, 235, 252);
+      box-shadow: 0px 0px 100px rgb(1, 235, 252), inset 0px 0px 10px rgb(1, 235, 252), 0px 0px 5px rgb(255, 255, 255);
+    }
+    50% {
+      opacity: 0.3;
+      border: 2px solid rgb(0, 80, 86);
+      box-shadow: none;
+    }
+  }
+ 
+  @keyframes iconflicker {
+    0%, 100% { 
+      // opacity: 1; 
+    }
+    50% {
+      // opacity: 0.2;
+    }
+  }
+ }
+ 
+
+.pictureHeader {
+  h1 {
+    color: rgb(1, 235, 252);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+    font: {
+      family: "Jersey 15", sans-serif;
+      weight: 300;
+      style: normal;
+      size: 75px;
+    }
+    text-shadow: 5px 5px 10px rgb(0, 182, 195);
+    // animation: flicker 2s linear infinite;
+  }
+}
+
+.burger-menu-button {
+  border: none;
+  background: none;
+  padding: 0;
+  position: relative;
+  ion-icon {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    color: rgb(0, 80, 86);
+    border: transparent;
+    font-size: 32px;
+  }
+  .burger-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+
+  .burger-menu-on {
+    position: absolute;
+    top: 0;
+    left: 0;
+    float: left;
+    display: block;
+    background: linear-gradient(to right, rgb(0, 80, 86), black);
+    height: 100vh;
+    width: 20vh;
+    z-index: 1000;
+    a {
+      color: rgb(0, 80, 86);
+    }
+  }
+}
