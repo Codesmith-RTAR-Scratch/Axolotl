@@ -6,8 +6,8 @@ const initialState = {
   loading: 'idle',
 };
 
-export const fetchReceiptData = createAsyncThunk('/table', async (formData) => {
-  const response = await axios.post('http://localhost:3000/table', formData, {
+export const fetchReceiptData = createAsyncThunk('/upload', async (formData) => {
+  const response = await axios.post('http://localhost:3000/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
