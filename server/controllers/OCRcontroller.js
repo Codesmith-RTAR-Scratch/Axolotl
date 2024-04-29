@@ -73,7 +73,7 @@ function extractData(){
   // }
   // console.log(bunch)
   // console.log(cache)
-  console.log(bunch);
+  console.log('bunch', bunch);
 }
 
 const controller = {};
@@ -81,19 +81,19 @@ const controller = {};
 controller.upload = (req, res, next) => {
 
   // OCR using tesseract to retreive information from our image file
-  tesseract.recognize(imagePath)
+  tesseract.recognize(req.file.image.data)
     .then((result) => {
     // dataVariable = punycode.encode(result.data.text)
       dataVariable = result.data.text;
       // console.log('data:', result.data)
       extractData();
+      res.locals.bunch = bunch;
+      res.status(200).send(res.locals.bunch);
 
     }).catch((error) => {
       console.log('error:', error.message);
     });
 
-  res.locals.bunch = bunch;
-  res.status(200).send(res.locals.bunch);
 };
 
 module.exports = controller;
