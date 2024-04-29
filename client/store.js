@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import photoSlicer from './reducers/photoSlicer';
+import recieptSlicer from './reducers/reciptSlicer';
 import menuSlicer from './reducers/burgerMenuSlicer';
 import tabBarSlicer from './reducers/tabBarSlicer';
 
 const store = configureStore({
   reducer: {
-    photos: photoSlicer,
+    reciepts: recieptSlicer,
     menu: menuSlicer,
     tabBar: tabBarSlicer
   },

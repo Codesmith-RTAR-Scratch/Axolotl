@@ -9,7 +9,6 @@ const PictureContainer = () => {
     <div className='pictureContainer'>
       <PictureHeader />
       <PictureBody />
-      {/* <TabBar /> */}
     </div>
   );
 };
